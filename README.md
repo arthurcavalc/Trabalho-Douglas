@@ -1,6 +1,4 @@
 
-# Task Manager – Full Stack (Frontend + Backend + Database)
-
 ## Integrantes do Grupo
 - Arthur Cavalcanti Mariz Cabral  
 - João Victor da Cunha Santos  
@@ -10,102 +8,83 @@
 
 ---
 
-Este projeto foi desenvolvido para atender aos requisitos acadêmicos de desenvolvimento Full Stack,
-incluindo frontend, backend e banco de dados com deploy em nuvem.
+Este projeto foi desenvolvido como parte da disciplina de desenvolvimento web, com o objetivo de criar uma aplicação completa utilizando frontend, backend e banco de dados, todos escritos em Typescript.
 
-## Tecnologias utilizadas
+A ideia escolhida pelo grupo foi um sistema simples de gerenciamento de tarefas, permitindo criar, editar, listar e excluir tarefas, além de oferecer alguns recursos extras como filtros e busca.
+
+---
+
+## Sobre o Projeto
+
+O sistema possui duas partes principais:
+
+### Backend
+Desenvolvido com Node.js, Express e Prisma, utilizando PostgreSQL como banco de dados.  
+O backend é responsável por gerenciar as tarefas (CRUD) e aplicar regras de validação antes de salvar qualquer informação no banco.
 
 ### Frontend
-- React + Vite  
+Desenvolvido com React + Vite.  
+A interface permite cadastrar novas tarefas, listar as já existentes, editar e excluir.  
+Também foram adicionados filtros por status, campo de busca por título e um pequeno resumo com a quantidade de tarefas em cada categoria.
+
+---
+
+## Tecnologias Utilizadas
+
+### Frontend
+- React  
 - Typescript  
+- Vite  
 - Axios  
 - Zod  
 
 ### Backend
-- Node.js + Express  
+- Node.js  
+- Express  
 - Typescript  
 - Prisma ORM  
-- Zod  
 - PostgreSQL  
+- Zod  
+
+---
 
 ## Funcionalidades
 
-- CRUD completo de tarefas  
+- Cadastro de tarefas  
+- Listagem geral  
+- Edição  
+- Exclusão  
 - Filtro por status  
 - Busca por título  
-- Ordenação por data de criação  
-- Contador de tarefas por status  
-- Validação com Zod (frontend e backend)  
-- Integração via Axios  
-- Deploy em plataformas como Render, Railway, Vercel ou Netlify  
+- Contador de tarefas por categoria  
+- Validação de dados tanto no frontend quanto no backend
 
 ---
 
-## Como rodar o projeto localmente
-
-### 1. Backend
+## Estrutura das Pastas
 
 ```
-cd backend
-npm install
-cp .env.example .env
-# Preencha o DATABASE_URL com o Postgres da nuvem
-npx prisma generate
-npx prisma migrate dev --name init
-npm run dev
-```
+backend/
+  src/
+  prisma/
+  package.json
 
-Servidor em:
-```
-http://localhost:3333
+frontend/
+  src/
+  package.json
 ```
 
 ---
 
-### 2. Frontend
-
-```
-cd frontend
-npm install
-npm run dev
-```
-
-Acesse:
-```
-http://localhost:5173
-```
-
----
-
-## Como realizar o deploy
+## Como executar localmente 
 
 ### Backend
-- Subir repositório no GitHub  
-- Criar serviço no Render/Railway  
-- Configurar variável DATABASE_URL  
-- Build: `npm install && npm run build`  
-- Start: `npm start`  
+- Instalar dependências com `npm install`  
+- Configurar a variável de ambiente para o banco  
+- Rodar o servidor com `npm run dev`  
 
 ### Frontend
-- Subir repositório no GitHub  
-- Deploy na Vercel/Netlify apontando para a pasta `frontend`  
-- Atualizar `baseURL` do axios para a URL pública do backend  
+- Instalar dependências com `npm install`  
+- Rodar com `npm run dev`  
 
 ---
-
-## Requisitos atendidos
-
-✔ Frontend e backend em Typescript  
-✔ Banco PostgreSQL com Prisma  
-✔ Axios para integração  
-✔ Validação completa com Zod  
-✔ CRUD funcional  
-✔ Funcionalidades extras implementadas  
-✔ Deploy em nuvem  
-✔ Repositório público no GitHub  
-
----
-
-## Observações finais
-O projeto está estruturado para fácil avaliação, com separação clara de backend e frontend,
-além de documentação completa para execução e manutenção.
