@@ -1,0 +1,30 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Task {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  status      Status   @default(PENDENTE)
+  priority    Priority @default(MEDIA)
+  dueDate     DateTime?
+  createdAt   DateTime @default(now())
+}
+
+enum Status {
+  PENDENTE
+  EM_ANDAMENTO
+  CONCLUIDA
+}
+
+enum Priority {
+  BAIXA
+  MEDIA
+  ALTA
+}

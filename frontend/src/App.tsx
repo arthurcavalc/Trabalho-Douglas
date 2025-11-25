@@ -1,0 +1,1 @@
+export default function App(){return <h1>Sistema de Tarefas Pronto</h1>}
