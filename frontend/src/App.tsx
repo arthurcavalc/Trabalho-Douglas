@@ -126,4 +126,112 @@ function App() {
         style={{
           marginBottom: 16,
           display: "flex",
-          gap
+          gap: 8,
+          alignItems: "center",
+        }}
+      >
+        <input
+          placeholder="Buscar por título..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ flex: 1 }}
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
+          <option value="">Todos</option>
+          <option value="PENDENTE">Pendentes</option>
+          <option value="EM_ANDAMENTO">Em andamento</option>
+          <option value="CONCLUIDA">Concluídas</option>
+        </select>
+      </section>
+
+      <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
+        <h2>{editingId ? "Editar tarefa" : "Nova tarefa"}</h2>
+
+        <div>
+          <label>Título</label>
+          <input name="title" value={form.title} onChange={handleChange} />
+          {errors.title && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.title}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label>Descrição</label>
+          <textarea
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+          />
+          {errors.description && (
+            <span style={{ color: "red", display: "block" }}>
+              {errors.description}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <label>Status</label>
+          <select name="status" value={form.status} onChange={handleChange}>
+            <option value="PENDENTE">Pendente</option>
+            <option value="EM_ANDAMENTO">Em andamento</option>
+            <option value="CONCLUIDA">Concluída</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Prioridade</label>
+          <select
+            name="priority"
+            value={form.priority}
+            onChange={handleChange}
+          >
+            <option value="BAIXA">Baixa</option>
+            <option value="MEDIA">Média</option>
+            <option value="ALTA">Alta</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Data limite</label>
+          <input
+            type="date"
+            name="dueDate"
+            value={form.dueDate ?? ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <button type="submit">
+          {editingId ? "Salvar alterações" : "Criar tarefa"}
+        </button>
+      </form>
+
+      <section>
+        <h2>Lista de tarefas</h2>
+        {tasks.map((task) => (
+          <div
+            key={task.id}
+            style={{
+              border: "1px solid #ccc",
+              padding: 8,
+              marginBottom: 8,
+            }}
+          >
+            <strong>{task.title}</strong> ({task.status} - {task.priority})
+            <p>{task.description}</p>
+            {task.dueDate && <p>Prazo: {task.dueDate.slice(0, 10)}</p>}
+            <button onClick={() => handleEdit(task)}>Editar</button>
+            <button onClick={() => handleDelete(task.id)}>Excluir</button>
+          </div>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+export default App;
