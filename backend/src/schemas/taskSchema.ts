@@ -5,7 +5,7 @@ export const taskCreateSchema = z.object({
   description: z.string().min(5, "Descrição deve ter ao menos 5 caracteres"),
   status: z.enum(["PENDENTE", "EM_ANDAMENTO", "CONCLUIDA"]).optional(),
   priority: z.enum(["BAIXA", "MEDIA", "ALTA"]).optional(),
-  // agora aceitando apenas string simples ou nada
+  // aceita string simples de data
   dueDate: z.string().optional(),
 });
 
