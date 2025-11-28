@@ -113,123 +113,157 @@ function App() {
   const pendentes = tasks.filter((t) => t.status === "PENDENTE").length;
 
   return (
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: 16 }}>
-      <h1>Gerenciador de Tarefas</h1>
+    <div className="app-root">
+      <div className="card">
+        <header className="app-header">
+          <h1>Gerenciador de Tarefas</h1>
+          <p className="summary">
+            Total: {total} | Pendentes: {pendentes} | Concluídas: {concluidas}
+          </p>
+        </header>
 
-      <section style={{ marginBottom: 16 }}>
-        <p>
-          Total: {total} | Pendentes: {pendentes} | Concluídas: {concluidas}
-        </p>
-      </section>
-
-      <section
-        style={{
-          marginBottom: 16,
-          display: "flex",
-          gap: 8,
-          alignItems: "center",
-        }}
-      >
-        <input
-          placeholder="Buscar por título..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{ flex: 1 }}
-        />
-        <select
-          value={statusFilter}
-          onChange={(e) => setStatusFilter(e.target.value)}
-        >
-          <option value="">Todos</option>
-          <option value="PENDENTE">Pendentes</option>
-          <option value="EM_ANDAMENTO">Em andamento</option>
-          <option value="CONCLUIDA">Concluídas</option>
-        </select>
-      </section>
-
-      <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
-        <h2>{editingId ? "Editar tarefa" : "Nova tarefa"}</h2>
-
-        <div>
-          <label>Título</label>
-          <input name="title" value={form.title} onChange={handleChange} />
-          {errors.title && (
-            <span style={{ color: "red", display: "block" }}>
-              {errors.title}
-            </span>
-          )}
-        </div>
-
-        <div>
-          <label>Descrição</label>
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-          />
-          {errors.description && (
-            <span style={{ color: "red", display: "block" }}>
-              {errors.description}
-            </span>
-          )}
-        </div>
-
-        <div>
-          <label>Status</label>
-          <select name="status" value={form.status} onChange={handleChange}>
-            <option value="PENDENTE">Pendente</option>
-            <option value="EM_ANDAMENTO">Em andamento</option>
-            <option value="CONCLUIDA">Concluída</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Prioridade</label>
-          <select
-            name="priority"
-            value={form.priority}
-            onChange={handleChange}
-          >
-            <option value="BAIXA">Baixa</option>
-            <option value="MEDIA">Média</option>
-            <option value="ALTA">Alta</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Data limite</label>
+        <section className="filters">
           <input
-            type="date"
-            name="dueDate"
-            value={form.dueDate ?? ""}
-            onChange={handleChange}
+            placeholder="Buscar por título..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
-        </div>
-
-        <button type="submit">
-          {editingId ? "Salvar alterações" : "Criar tarefa"}
-        </button>
-      </form>
-
-      <section>
-        <h2>Lista de tarefas</h2>
-        {tasks.map((task) => (
-          <div
-            key={task.id}
-            style={{
-              border: "1px solid #ccc",
-              padding: 8,
-              marginBottom: 8,
-            }}
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
           >
-            <strong>{task.title}</strong> ({task.status} - {task.priority})
-            <p>{task.description}</p>
-            {task.dueDate && <p>Prazo: {task.dueDate.slice(0, 10)}</p>}
-            <button onClick={() => handleEdit(task)}>Editar</button>
-            <button onClick={() => handleDelete(task.id)}>Excluir</button>
+            <option value="">Todos</option>
+            <option value="PENDENTE">Pendentes</option>
+            <option value="EM_ANDAMENTO">Em andamento</option>
+            <option value="CONCLUIDA">Concluídas</option>
+          </select>
+        </section>
+
+        <section>
+          <h2 className="section-title">
+            {editingId ? "Editar tarefa" : "Nova tarefa"}
+          </h2>
+
+          <form onSubmit={handleSubmit} className="form-grid">
+            <div className="form-row form-row-full">
+              <label className="label">Título</label>
+              <input
+                name="title"
+                className="input"
+                value={form.title}
+                onChange={handleChange}
+              />
+              {errors.title && <span className="error">{errors.title}</span>}
+            </div>
+
+            <div className="form-row form-row-full">
+              <label className="label">Descrição</label>
+              <textarea
+                name="description"
+                className="textarea"
+                value={form.description}
+                onChange={handleChange}
+              />
+              {errors.description && (
+                <span className="error">{errors.description}</span>
+              )}
+            </div>
+
+            <div className="form-row">
+              <label className="label">Status</label>
+              <select
+                name="status"
+                className="select"
+                value={form.status}
+                onChange={handleChange}
+              >
+                <option value="PENDENTE">Pendente</option>
+                <option value="EM_ANDAMENTO">Em andamento</option>
+                <option value="CONCLUIDA">Concluída</option>
+              </select>
+            </div>
+
+            <div className="form-row">
+              <label className="label">Prioridade</label>
+              <select
+                name="priority"
+                className="select"
+                value={form.priority}
+                onChange={handleChange}
+              >
+                <option value="BAIXA">Baixa</option>
+                <option value="MEDIA">Média</option>
+                <option value="ALTA">Alta</option>
+              </select>
+            </div>
+
+            <div className="form-row">
+              <label className="label">Data limite</label>
+              <input
+                type="date"
+                name="dueDate"
+                className="date"
+                value={form.dueDate ?? ""}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-row">
+              <button type="submit" className="button-primary">
+                {editingId ? "Salvar alterações" : "Criar tarefa"}
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section>
+          <h2 className="section-title">Lista de tarefas</h2>
+
+          <div className="tasks-list">
+            {tasks.map((task) => (
+              <div key={task.id} className="task-card">
+                <div className="task-header">
+                  <span className="task-title">{task.title}</span>
+                  <div className="task-badges">
+                    <span className={`badge status-${task.status}`}>
+                      {task.status.replace("_", " ")}
+                    </span>
+                    <span className={`badge priority-${task.priority}`}>
+                      {task.priority}
+                    </span>
+                    {task.dueDate && (
+                      <span className="badge">
+                        Prazo: {task.dueDate.slice(0, 10)}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p>{task.description}</p>
+
+                <div className="task-actions">
+                  <button
+                    type="button"
+                    className="button-secondary"
+                    onClick={() => handleEdit(task)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    type="button"
+                    className="button-danger"
+                    onClick={() => handleDelete(task.id)}
+                  >
+                    Excluir
+                  </button>
+                </div>
+              </div>
+            ))}
+
+            {tasks.length === 0 && <p>Nenhuma tarefa cadastrada ainda.</p>}
           </div>
-        ))}
-      </section>
+        </section>
+      </div>
     </div>
   );
 }
