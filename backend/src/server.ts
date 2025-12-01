@@ -5,31 +5,8 @@ import tasksRouter from "./routes/tasks";
 
 const app = express();
 
-// Libera CORS para qualquer origem (localhost, Vercel, etc.)
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-
-// Garante os headers de CORS em qualquer resposta
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET,POST,PUT,DELETE,OPTIONS"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization"
-  );
-
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-
-  next();
-});
+// CORS bem simples: libera tudo
+app.use(cors());
 
 app.use(express.json());
 
